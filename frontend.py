@@ -1,25 +1,13 @@
 import streamlit as st
-from langchain.agents.agent_types import AgentType
-from langchain_experimental.agents.agent_toolkits import create_csv_agent
-from langchain.chains import ConversationChain
-from langchain.memory import ConversationBufferWindowMemory
 from langchain.prompts.prompt import PromptTemplate
-from langchain.memory.chat_message_histories import StreamlitChatMessageHistory
 from langchain.callbacks.base import BaseCallbackHandler
-from prompt_templates import DEFAULT_TEMPLATE
+from prompt_templates import DEFAULT_TEMPLATE,SQL_TEMPLATE
 
 from chatbot import get_llm, get_agent
 st.title("🤖 Chat with AIuda")
 
-# DEFAULT_TEMPLATE = """The following is a friendly conversation between a human and an AI. The AI is talkative and provides lots of specific details from its context. If the AI does not know the answer to a question, it truthfully says it does not know.
-
-# Current conversation:
-# {history}
-# Human: {input}
-# Assistant:"""
-
 PROMPT = PromptTemplate(
-    input_variables=["history", "input"], template=DEFAULT_TEMPLATE)
+    input_variables=["history", "input"], template=SQL_TEMPLATE)
 
 INIT_MESSAGE = {"role": "assistant",
                 "content": "Hi! I'm AIuda on Bedrock. How may I help you?"}
@@ -35,7 +23,6 @@ class StreamHandler(BaseCallbackHandler):
 
 
 def init_conversationchain():
-    llm = get_llm()
     conversation = get_agent()
 
     # Store LLM generated responses
