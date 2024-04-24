@@ -1,13 +1,9 @@
 import streamlit as st
-from langchain.prompts.prompt import PromptTemplate
 from langchain.callbacks.base import BaseCallbackHandler
 from prompt_templates import DEFAULT_TEMPLATE,SQL_TEMPLATE
 
-from chatbot import get_llm, get_agent
+from chatbot import get_agent
 st.title("🤖 Chat with AIuda")
-
-PROMPT = PromptTemplate(
-    input_variables=["history", "input"], template=SQL_TEMPLATE)
 
 INIT_MESSAGE = {"role": "assistant",
                 "content": "Hi! I'm AIuda on Bedrock. How may I help you?"}

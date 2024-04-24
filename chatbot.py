@@ -1,13 +1,9 @@
 from langchain.agents.agent_types import AgentType
-from langchain_experimental.agents.agent_toolkits import create_csv_agent
 from langchain.callbacks.streaming_stdout import StreamingStdOutCallbackHandler
 from langchain_community.chat_models.bedrock import BedrockChat
 from langchain_community.utilities.sql_database import SQLDatabase
 from langchain_community.agent_toolkits import create_sql_agent
-from langchain_core.prompts import BasePromptTemplate
-from prompt_templates import DEFAULT_TEMPLATE,SQL_TEMPLATE
-from langchain_core.prompts import PromptTemplate, FewShotPromptTemplate
-from prompts import few_shot_prompt
+from prompts.non_verbose_prompts import few_shot_prompt
 
 db_uri = "postgresql://username:password@localhost:5432/database"
 db = SQLDatabase.from_uri(db_uri)
