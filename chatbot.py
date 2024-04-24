@@ -3,6 +3,11 @@ from langchain_experimental.agents.agent_toolkits import create_csv_agent
 from langchain.callbacks.streaming_stdout import StreamingStdOutCallbackHandler
 from langchain_community.chat_models.bedrock import BedrockChat
 import streamlit as st 
+from langchain_community.utilities.sql_database import SQLDatabase
+from langchain_community.agent_toolkits import create_sql_agent
+
+db_uri = "postgresql://username:password@localhost:5432/database"
+db = SQLDatabase.from_uri(db_uri)
 
 def get_llm():
     # ai21.j2-ultra-v1
@@ -27,13 +32,7 @@ def get_llm():
  
  
 def get_agent():
-    return create_csv_agent(
-        get_llm(),
-        "testdata.csv",
-        # verbose=True,
-        agent_type=AgentType.ZERO_SHOT_REACT_DESCRIPTION,
-        handle_parsing_errors=True
-    )
+    return create_sql_agent(get_llm(), db=db, verbose=True)
 
 # agent = create_csv_agent(
 #     get_llm(),

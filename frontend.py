@@ -36,14 +36,7 @@ class StreamHandler(BaseCallbackHandler):
 
 def init_conversationchain():
     llm = get_llm()
-    conversation = create_csv_agent(
-        llm,
-        "testdata.csv",
-        verbose=True,
-        agent_type=AgentType.ZERO_SHOT_REACT_DESCRIPTION,
-        handle_parsing_errors=True,
-        prompt=PROMPT,
-    )
+    conversation = get_agent()
 
     # Store LLM generated responses
 
