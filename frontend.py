@@ -6,19 +6,20 @@ from langchain.memory import ConversationBufferWindowMemory
 from langchain.prompts.prompt import PromptTemplate
 from langchain.memory.chat_message_histories import StreamlitChatMessageHistory
 from langchain.callbacks.base import BaseCallbackHandler
+from prompt_templates import DEFAULT_TEMPLATE
 
 from chatbot import get_llm, get_agent
 st.title("🤖 Chat with AIuda")
 
-DEFAULT_CLAUDE_TEMPLATE = """The following is a friendly conversation between a human and an AI. The AI is talkative and provides lots of specific details from its context. If the AI does not know the answer to a question, it truthfully says it does not know.
+# DEFAULT_TEMPLATE = """The following is a friendly conversation between a human and an AI. The AI is talkative and provides lots of specific details from its context. If the AI does not know the answer to a question, it truthfully says it does not know.
 
-Current conversation:
-{history}
-Human: {input}
-Assistant:"""
+# Current conversation:
+# {history}
+# Human: {input}
+# Assistant:"""
 
-CLAUDE_PROMPT = PromptTemplate(
-    input_variables=["history", "input"], template=DEFAULT_CLAUDE_TEMPLATE)
+PROMPT = PromptTemplate(
+    input_variables=["history", "input"], template=DEFAULT_TEMPLATE)
 
 INIT_MESSAGE = {"role": "assistant",
                 "content": "Hi! I'm AIuda on Bedrock. How may I help you?"}
@@ -41,7 +42,7 @@ def init_conversationchain():
         verbose=True,
         agent_type=AgentType.ZERO_SHOT_REACT_DESCRIPTION,
         handle_parsing_errors=True,
-        prompt=CLAUDE_PROMPT,
+        prompt=PROMPT,
     )
 
     # Store LLM generated responses
