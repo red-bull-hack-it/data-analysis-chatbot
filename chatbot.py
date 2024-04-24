@@ -18,7 +18,7 @@ def get_llm():
     # anthropic.claude-3-sonnet-20240229-v1:0
     # cohere.command-text-v14
     llm = Bedrock(
-        model_id="amazon.titan-text-express-v1",
+        model_id="anthropic.claude-3-opus-20240229-v1:0",
         region_name='us-west-2',
         streaming=True,
         callbacks=[StreamingStdOutCallbackHandler()],
