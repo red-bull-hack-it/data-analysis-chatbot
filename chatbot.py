@@ -2,23 +2,23 @@ from langchain.agents.agent_types import AgentType
 from langchain_experimental.agents.agent_toolkits import create_csv_agent
 from langchain.callbacks.streaming_stdout import StreamingStdOutCallbackHandler
 from langchain_community.chat_models.bedrock import BedrockChat
+import streamlit as st 
 
- 
 def get_llm():
-    model_kwargs = { 
-        "maxTokens": 1024, 
-        "temperature": 0, 
-        "topP": 0.5, 
-        "stopSequences": [], 
-        "countPenalty": {"scale": 0 }, 
-        "presencePenalty": {"scale": 0 }, 
-        "frequencyPenalty": {"scale": 0 } 
-    }
     # ai21.j2-ultra-v1
     # anthropic.claude-3-sonnet-20240229-v1:0
     # cohere.command-text-v14
     llm = BedrockChat(
-        model_id="anthropic.claude-3-opus-20240229-v1:0",
+        model_kwargs={
+            # "maxTokens": 1024,
+            "temperature": 0,
+            # "topP": 0.5, 
+            # "stopSequences": [],
+            # "countPenalty": {"scale": 0 },
+            # "presencePenalty": {"scale": 0 },
+            # "frequencyPenalty": {"scale": 0 }
+        },
+        model_id="anthropic.claude-3-sonnet-20240229-v1:0",
         region_name='us-west-2',
         streaming=True,
         callbacks=[StreamingStdOutCallbackHandler()],
@@ -26,17 +26,26 @@ def get_llm():
     return llm
  
  
-agent = create_csv_agent(
-    get_llm(),
-    "testdata.csv",
-    verbose=True,
-    agent_type=AgentType.ZERO_SHOT_REACT_DESCRIPTION,
-    handle_parsing_error=True
-)
+def get_agent():
+    return create_csv_agent(
+        get_llm(),
+        "testdata.csv",
+        # verbose=True,
+        agent_type=AgentType.ZERO_SHOT_REACT_DESCRIPTION,
+        handle_parsing_errors=True
+    )
+
+# agent = create_csv_agent(
+#     get_llm(),
+#     "testdata.csv",
+#     verbose=True,
+#     agent_type=AgentType.ZERO_SHOT_REACT_DESCRIPTION,
+#     handle_parsing_error=True
+# )
  
  
-try:
-    result = agent.run("list me the social media platforms that are in this file")
-    print(result)
-except Exception as e:
-    print("Error running agent:", str(e))
+# try:
+#     result = agent.run("list me the social media platforms that are in this file")
+#     print(result)
+# except Exception as e:
+#     print("Error running agent:", str(e))
