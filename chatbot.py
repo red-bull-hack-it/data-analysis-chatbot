@@ -18,7 +18,7 @@ def get_llm():
     # anthropic.claude-3-sonnet-20240229-v1:0
     # cohere.command-text-v14
     llm = Bedrock(
-        model_id="cohere.command-text-v14",
+        model_id="amazon.titan-text-express-v1",
         region_name='us-west-2',
         streaming=True,
         callbacks=[StreamingStdOutCallbackHandler()],
@@ -36,7 +36,7 @@ agent = create_csv_agent(
  
  
 try:
-    result = agent.run("how many entries are in this csv file? and reason the answer.")
-    print("Agent Result:", result)
+    result = agent.run("list me the social media platforms that are in this file")
+    print(result)
 except Exception as e:
     print("Error running agent:", str(e))
