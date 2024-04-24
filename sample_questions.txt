@@ -1,0 +1,5 @@
+How many rows do we have in the databse?
+
+How many platforms do we have in the databse
+
+can you tell me how many rows do we have in the databse classified by Social media platforms?
