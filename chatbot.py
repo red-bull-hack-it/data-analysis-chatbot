@@ -1,8 +1,8 @@
 from langchain.agents.agent_types import AgentType
 from langchain_experimental.agents.agent_toolkits import create_csv_agent
-from langchain_community.llms import Bedrock
 from langchain.callbacks.streaming_stdout import StreamingStdOutCallbackHandler
- 
+from langchain_community.chat_models.bedrock import BedrockChat
+
  
 def get_llm():
     model_kwargs = { 
@@ -17,7 +17,7 @@ def get_llm():
     # ai21.j2-ultra-v1
     # anthropic.claude-3-sonnet-20240229-v1:0
     # cohere.command-text-v14
-    llm = Bedrock(
+    llm = BedrockChat(
         model_id="anthropic.claude-3-opus-20240229-v1:0",
         region_name='us-west-2',
         streaming=True,
