@@ -4,6 +4,11 @@ from prompt_templates import DEFAULT_TEMPLATE,SQL_TEMPLATE
 
 from chatbot import get_agent
 st.title("🤖 Chat with AIuda")
+st.subheader("Example Questions:")
+st.markdown("- How many assets do we have for the project_group Red Bull Cerro Abajo?")
+st.markdown("- From how many platforms do we have data? I am only interested in Assets that containt Red Bull Cerro Abajo projects?")
+st.markdown("- What was the asset with the most views? Return the me the VIN, views, platform and project title")
+st.markdown("- Wich platform has the most views? Tell me how many views the platform got")
 
 INIT_MESSAGE = {"role": "assistant",
                 "content": "Hi! I'm AIuda on Bedrock. How may I help you?"}
