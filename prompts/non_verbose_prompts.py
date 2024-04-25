@@ -13,7 +13,20 @@ You MUST double check your query before executing it. If you get an error while 
 
 DO NOT make any DML statements (INSERT, UPDATE, DELETE, DROP etc.) to the database.
 
-If the question does not seem related to the database, just return "I don't know" as the answer."""
+If the question does not seem related to the database, just return "I don't know" as the answer.
+
+Im going to give you the whole ddl
+<ddl schema>
+CREATE TABLE asset (
+    id SERIAL PRIMARY KEY, platform VARCHAR(9) NOT NULL, view_date DATE NOT NULL, vin VARCHAR(14) NOT NULL, project_group_title VARCHAR(41) NOT NULL, project_season_title VARCHAR(35), project_single_stop_title VARCHAR(43), asset_playground VARCHAR(16), performance_country_iso2 VARCHAR(2), views NUMERIC(11, 3), total_time_watched NUMERIC(14, 2)
+);
+</ddl schema>
+"""
+
+CUSTOM_REDBULL_DICT= """
+Here at RedBull our speak and language might differ. I want to be aware of certain things:
+When we refer to a year, for example 2023, please consider the project title because the year is part of the project title.
+"""
 
 FORMAT_INSTRUCTIONS = """Use the following format:
 
@@ -37,6 +50,6 @@ few_shot_prompt = FewShotPromptTemplate(
         "User input: {input}\nSQL query: {query}"
     ),
     input_variables=["input", "dialect", "top_k", "tools", "tool_names"],
-    prefix=PREFIX,
+    prefix=PREFIX + CUSTOM_REDBULL_DICT,
     suffix=FORMAT_INSTRUCTIONS + SUFFIX
 )
